@@ -1,0 +1,22 @@
+name: Simple Workflow
+
+on:
+  push:
+    branches:
+      - main
+  schedule:
+    - cron: '0 * * * *' # A cada hora
+
+jobs:
+  example-job:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - run: echo "This runs on push to main."
+      if: github.event_name == 'push'
+
+    - run: echo "This runs every hour."
+      if: github.event_name == 'schedule'
+
